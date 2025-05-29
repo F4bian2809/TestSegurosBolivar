@@ -41,31 +41,32 @@ public class Formulario extends Base{
 	By cityLocator = By.id("city");
 	By optionCityLocator = By.xpath("//div[contains(@id,'react-select-4-option-')]");
 	By submitLocator = By.id("submit");
+	By resumeStateAndCityLocator = By.xpath("//td[text()='State and City']/following-sibling::td");
 	
 	public Formulario(WebDriver driver) {
 		super(driver);
 		// TODO Auto-generated constructor stub
 	}
-	//Método para mapear campo name
+	//Método para digitar en el campo name
 	public Formulario name(String userName) throws InterruptedException{
 		scroll(200);
 		click(nameLocator);
 		type(userName,nameLocator);
 		return this;
 	}
-	//Método para mapear el campo lastname
+	//Método para digitar en el campo lastname
 	public Formulario lastname(String lasName) throws InterruptedException{
 		click(lastnameLocator);
 		type(lasName,lastnameLocator);
 		return this;		
 	}
-	//Método para mapear el campo email
+	//Método para digitar en el campo email
 	public Formulario email(String email) throws InterruptedException{
 		click(emailLocator);
 		type(email,emailLocator);
 		return this;		
 	}	
-	//Método para mapear el campo gender
+	//Método para seleccionar genero
 	public Formulario selectGender() throws InterruptedException {
         //Encuentra todos los radio buttons por medio del xpath
         List<WebElement> genderRadioButtons = findElements(genderLocator);
@@ -167,6 +168,7 @@ public class Formulario extends Base{
 	}
 	//Método para cargar una imagen
 	public Formulario fileUpload() {
+		scroll(300);
 	    File uploadFile = new File("C:\\Users\\ASUS 15\\Desktop\\Prueba Seguros Bolivar\\testCases.docx");
 	    WebElement fileInput = driver.findElement(By.cssSelector("input[type='file']"));
 	    fileInput.sendKeys(uploadFile.getAbsolutePath());
@@ -211,36 +213,59 @@ public class Formulario extends Base{
 		screenshot(driver);
 		return this;
 	}
-	
+	//Método para validar numero de telefono corto
 	public Formulario validateShortNumber() throws InterruptedException, IOException {
 		scroll(-500);
 		validateFieldState(mobileNumberLocator, "rgb(220, 53, 69)");
 		screenshot(driver);
 		return this;
 	}
-	
+	//Método para validar nombre muy largo
 	public Formulario validateLargeName() throws InterruptedException, IOException {
 		scroll(-500);
 		validateFieldState(nameLocator, "rgb(220, 53, 69)");
 		screenshot(driver);
 		return this;
 	}
-	
+	//Método para validar fecha de nacimiento opcional
 	public Formulario validateDateOfBirthToday() throws InterruptedException, IOException {
 		scroll(-500);
 		validateFieldState(dateOfBirthLocator, "rgb(220, 53, 69)");
 		screenshot(driver);
 		return this;
 	}
-	
-	public Formulario validateDateOfBirthToda() throws InterruptedException, IOException {
+	//Método para validar genero obligatorio
+	public Formulario validategender() throws InterruptedException, IOException {
 		scroll(-500);
-		validateFieldState(dateOfBirthLocator, "rgb(220, 53, 69)");
+		validateFieldState(genderLocator, "rgb(220, 53, 69)");
+		screenshot(driver);
+		return this;
+	}
+	//Método para validar direccion opcional	
+	public Formulario validateCurrentAddress() throws InterruptedException, IOException {
+		scroll(-500);
+		validateFieldState(currentAddressLocator, "rgb(40, 167, 69)");
+		screenshot(driver);
+		return this;
+	}
+	//Método para validar hobbies opcionales
+	public Formulario validateHobbies() throws InterruptedException, IOException {
+		scroll(-500);
+		List<WebElement> hobbiesCheckBox = findElements(checkBoxLocator);
+		for(WebElement hobby: hobbiesCheckBox) {
+			assertEquals("rgb(40, 167, 69)", hobby.getCssValue("border-color") );
+		}		
+		screenshot(driver);
+		return this;
+	}
+	//Método para validar ciudad y estado opcionales
+	public Formulario validateStateAndCity() throws InterruptedException, IOException {
+		assertEquals("", driver.findElement(resumeStateAndCityLocator).getText());
 		screenshot(driver);
 		return this;
 	}
 	
-	//Método valdiar error en campo
+	//Método valdiar estado del campo
 	public void validateFieldState(By locator, String expectedColor) throws InterruptedException, IOException {
 		WebElement element = driver.findElement(locator);
 		assertEquals(expectedColor, element.getCssValue("border-color"));

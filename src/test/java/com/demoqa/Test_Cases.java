@@ -27,19 +27,13 @@ public class Test_Cases {
 
 	@After
 	public void tearDown() throws Exception {
-		//driver.quit();
+		driver.quit();
 	}
 	@Test
 	public void formularioVacio() throws InterruptedException, IOException {
 		locatorFormulario.submit().validateAlertsSubmitVacio();
 	}
-	
-	/*@Test
-	public void formularioLleno() throws InterruptedException {
-		locatorFormulario.name("Fabian").lastname("Arias").email("fabian@pruebas.com").selectGender().mobileNumber("3000000001").dateofBirth(driver, "05","September","2025").
-		subjects("I").selectHobbies().fileUpload().currentAddress("Calle falsa # 123").state().city().submit();
-	}
-	
+		
 	@Test
 	public void mobileNumberinferior() throws InterruptedException, IOException {
 		locatorFormulario.mobileNumber("300000").submit().validateShortNumber();
@@ -56,44 +50,28 @@ public class Test_Cases {
 	}
 	
 	@Test
-	public void GenderVacio() throws InterruptedException {
-		locatorFormulario.name("Fabian")
-		.lastname("Arias").email("fabian@pruebas.com").selectGender().mobileNumber("3000000003").dateofBirth(driver, "05","September","2025").
-		subjects("I").selectHobbies().fileUpload().currentAddress("Calle falsa # 123").state().city().submit();
+	public void GenderVacio() throws InterruptedException, IOException {
+		locatorFormulario.name("Fabian").lastname("Arias").mobileNumber("3000000001").validategender();
 	}
 
 	@Test
-	public void HobbieVacio() throws InterruptedException {
+	public void HobbieVacio() throws InterruptedException, IOException {
 		locatorFormulario.name("Fabian")
 		.lastname("Arias").email("fabian@pruebas.com").selectGender().mobileNumber("3000000004").dateofBirth(driver, "05","September","2025").
-		subjects("I").selectHobbies().fileUpload().currentAddress("Calle falsa # 123").state().city().submit();
+		subjects("I").fileUpload().currentAddress("Calle falsa # 123").state().city().submit().validateHobbies();
 	}
-	
+		
 	@Test
-	public void FileUpload() throws InterruptedException {
-		locatorFormulario.name("Fabian")
-		.lastname("Arias").email("fabian@pruebas.com").selectGender().mobileNumber("3000000004").dateofBirth(driver, "05","September","2025").
-		subjects("I").selectHobbies().fileUpload().currentAddress("Calle falsa # 123").state().city().submit();
-	}
-	
-	@Test
-	public void CurrentAddressVacio() throws InterruptedException {
+	public void CurrentAddressVacio() throws InterruptedException, IOException {
 		locatorFormulario.name("Fabian")
 		.lastname("Arias").email("fabian@pruebas.com").selectGender().mobileNumber("3000000005").dateofBirth(driver, "05","September","2025").
-		subjects("I").selectHobbies().fileUpload().currentAddress("Calle falsa # 123").state().city().submit();
+		subjects("I").selectHobbies().fileUpload().state().city().submit().validateCurrentAddress();
 	}
 	
 	@Test
-	public void StateAndCityVacios() throws InterruptedException {
+	public void StateAndCityVacios() throws InterruptedException, IOException {
 		locatorFormulario.name("Fabian")
 		.lastname("Arias").email("fabian@pruebas.com").selectGender().mobileNumber("3000000006").dateofBirth(driver, "05","September","2025").
-		subjects("I").selectHobbies().fileUpload().currentAddress("Calle falsa # 123").state().city().submit();
+		subjects("I").selectHobbies().fileUpload().currentAddress("Calle falsa # 123").submit().validateStateAndCity();
 	}
-	
-	@Test
-	public void CityVacio() throws InterruptedException {
-		locatorFormulario.name("Fabian")
-		.lastname("Arias").email("fabian@pruebas.com").selectGender().mobileNumber("3000000007").dateofBirth(driver, "05","September","2025").
-		subjects("I").selectHobbies().fileUpload().currentAddress("Calle falsa # 123").state().city().submit();
-	}*/
 }
